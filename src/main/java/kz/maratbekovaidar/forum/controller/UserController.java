@@ -128,7 +128,8 @@ public class UserController {
                 user.getPhoneNumber(),
                 user.getFirstName(),
                 user.getLastName(),
-                user.getRoles()
+                user.getRoles(),
+                userService.getUsersPosts(user)
         );
         return ResponseEntity.ok().body(userExport);
     }
@@ -151,4 +152,5 @@ class UserExport {
     private String firstName;
     private String lastName;
     private Collection<Role> roles;
+    private Collection<Long> posts;
 }
