@@ -27,17 +27,19 @@ public class AituStudentsForumRestServiceApplication {
 	@Bean
 	CommandLineRunner runner(UserService userService) {
 		return args -> {
-			userService.saveRole(new Role(null, "ROLE_USER"));
-			userService.saveRole(new Role(null, "ROLE_MODERATOR"));
-			userService.saveRole(new Role(null, "ROLE_ADMIN"));
-			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
-
-			userService.saveUser(new User(null, "maratbekovaidar", "11qwerty", "maratbekovaidar@gmail.com", "87088893456", "Aidar", "Maratbekov", new ArrayList<>()));
-
-			userService.addRoleToUser("maratbekovaidar", "ROLE_USER");
-			userService.addRoleToUser("maratbekovaidar", "ROLE_MODERATOR");
-			userService.addRoleToUser("maratbekovaidar", "ROLE_ADMIN");
-			userService.addRoleToUser("maratbekovaidar", "ROLE_SUPER_ADMIN");
+//			userService.saveRole(new Role(null, "ROLE_USER"));
+//			userService.saveRole(new Role(null, "ROLE_MODERATOR"));
+//			userService.saveRole(new Role(null, "ROLE_ADMIN"));
+//			userService.saveRole(new Role(null, "ROLE_SUPER_ADMIN"));
+//
+//			userService.saveUser(
+//					new User(null, "maratbekovaidar", "11qwerty", "maratbekovaidar@gmail.com", "87088893456", "Aidar", "Maratbekov", new ArrayList<>(), new ArrayList<>())
+//			);
+//
+//			userService.addRoleToUser("maratbekovaidar", "ROLE_USER");
+//			userService.addRoleToUser("maratbekovaidar", "ROLE_MODERATOR");
+//			userService.addRoleToUser("maratbekovaidar", "ROLE_ADMIN");
+//			userService.addRoleToUser("maratbekovaidar", "ROLE_SUPER_ADMIN");
 		};
 	}
 }

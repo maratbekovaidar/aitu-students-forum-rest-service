@@ -4,8 +4,10 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import kz.maratbekovaidar.forum.model.Post;
 import kz.maratbekovaidar.forum.model.Role;
 import kz.maratbekovaidar.forum.model.User;
+import kz.maratbekovaidar.forum.repository.PostRepository;
 import kz.maratbekovaidar.forum.repository.RoleRepository;
 import kz.maratbekovaidar.forum.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +35,7 @@ public class UserService implements UserServiceInterface, UserDetailsService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PostRepository postRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -89,6 +92,14 @@ public class UserService implements UserServiceInterface, UserDetailsService {
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT decodedJWT = verifier.verify(token);
         return decodedJWT.getSubject();
+    }
+
+    public Collection<Long> getUsersPosts(User user) {
+        Collection<Long> posts = new ArrayList<>();
+        postRepository.findAllByOwner(user).forEach((post -> {
+            posts.add(post.getId());
+        }));
+        return posts;
     }
 
 }

@@ -1,8 +1,7 @@
 package kz.maratbekovaidar.forum.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,5 +27,10 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonIgnoreProperties("user")
+    private Collection<Post> posts = new ArrayList<>();
 
 }
