@@ -4,9 +4,11 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import kz.maratbekovaidar.forum.model.Comment;
 import kz.maratbekovaidar.forum.model.Post;
 import kz.maratbekovaidar.forum.model.PostExport;
 import kz.maratbekovaidar.forum.repository.PostRepository;
+import kz.maratbekovaidar.forum.service.CommentService;
 import kz.maratbekovaidar.forum.service.PostService;
 import kz.maratbekovaidar.forum.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 import java.util.List;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
@@ -26,6 +29,8 @@ public class PostController {
     private final PostService postService;
 
     private final UserService userService;
+
+    private final CommentService commentService;
 
     @Autowired
     private final PostRepository postRepository;
@@ -53,6 +58,11 @@ public class PostController {
         return ResponseEntity.ok().body(postService.findByTitle(title));
     }
 
+    @GetMapping("/comments")
+    ResponseEntity<List<Comment>> getComments(@RequestParam("id") Long id) {
+        return ResponseEntity.ok().body(postService.getComments(id));
+    }
+
     @PostMapping("/delete")
     ResponseEntity<?> deletePost(@RequestParam("title") String title) {
         postService.deletePost(title);
@@ -60,7 +70,7 @@ public class PostController {
     }
 
     @GetMapping("/all")
-    ResponseEntity<List<Post>> allPost() {
+    ResponseEntity<Collection<Post>> allPost() {
         return ResponseEntity.ok().body(postService.allPost());
     }
 

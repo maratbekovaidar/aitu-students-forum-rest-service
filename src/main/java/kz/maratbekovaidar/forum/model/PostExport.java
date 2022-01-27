@@ -3,6 +3,8 @@ package kz.maratbekovaidar.forum.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Collection;
+
 @Data
 @AllArgsConstructor
 public class PostExport {
@@ -11,4 +13,5 @@ public class PostExport {
     private String description;
     private String text;
     private String ownerUsername;
+    private Collection<Comment> comments;
 }

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -22,4 +24,8 @@ public class Post {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnoreProperties("post")
     private User owner;
+
+    @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Collection<Comment> comments;
 }
